@@ -6,8 +6,9 @@ const morgan = require('morgan')
 const con_deliserdang = require('./config/db_deliserdang');
 const con_medan = require('./config/db_medan');
 
-const deliserdangController = require('./controllers/deliserdang/userController');
-const medanController = require('./controllers/medan/userController');
+// const deliserdangController = require('./controllers/deliserdang/userController');
+// const medanController = require('./controllers/medan/userController');
+const transactionController = require('./controllers/deliserdang/transactionController');
 
 var deliserdang = con_deliserdang.sequelize;
 var medan = con_medan.sequelize;
@@ -25,9 +26,10 @@ app.disable('etag');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.group("/api/v1", (router) => {
-    router.use('/deliserdang', deliserdangController);
-    router.use('/medan', medanController);
+app.group("/api/v1/deliserdang", (router) => {
+    // router.use('/deliserdang', deliserdangController);
+    // router.use('/medan', medanController);
+    router.use('/transactions', transactionController);
 });
 
 app.get('/', (req, res) => {

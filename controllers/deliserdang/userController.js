@@ -10,4 +10,20 @@ router.get('/', (req, res) => {
     }).catch(err => console.log(err));
 });
 
+router.post('/', (req, res) => {
+    var name = req.body.name
+    var email = req.body.email
+    var age = req.body.age
+    var address = req.body.address
+    userModel.create({
+        name: name,
+        email: email,
+        age: age,
+        address: address
+    });
+    res.json({
+        message: "Success created users",
+    });
+});
+
 module.exports = router
